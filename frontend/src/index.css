@@ -1,0 +1,248 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+@theme {
+  --color-primary: #00f2ff;
+  --color-secondary: #7000ff;
+  --color-accent:   #ff0055;
+  --color-success:  #00ff9d;
+  --color-warning:  #ffcc00;
+  --color-dark-950: #020204;
+  --color-dark-900: #0a0a0f;
+  --color-dark-800: #12121e;
+
+  --font-family-sans: 'Inter', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* ── BASE ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-color: var(--color-dark-950);
+  color: #a0aec0;
+  font-family: var(--font-family-sans);
+  margin: 0; padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #020204; }
+::-webkit-scrollbar-thumb { background: #1a1a2e; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #00f2ff; }
+
+/* ── HUD PANEL ────────────────────────────────────────────── */
+.hud-panel {
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* ── GLASS CARD ───────────────────────────────────────────── */
+.glass-card {
+  background: rgba(255,255,255,0.025);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+/* ── HUD TEXT (monospace label style) ────────────────────── */
+.hud-text {
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  line-height: 1.4;
+}
+
+/* ── NEON GLOW ────────────────────────────────────────────── */
+.neon-glow     { box-shadow: 0 0 8px rgba(0,242,255,0.4), 0 0 24px rgba(0,242,255,0.15); }
+.glow-accent   { box-shadow: 0 0 8px rgba(255,0,85,0.4),  0 0 24px rgba(255,0,85,0.15); }
+.glow-success  { box-shadow: 0 0 8px rgba(0,255,157,0.4), 0 0 24px rgba(0,255,157,0.15); }
+
+/* ── STATUS DOT ───────────────────────────────────────────── */
+.status-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  position: relative;
+}
+.status-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: ripple 1.8s ease-in-out infinite;
+}
+.status-active { background: #00ff9d; }
+.status-active::after { background: #00ff9d; }
+.status-warning { background: #ffcc00; }
+.status-warning::after { background: #ffcc00; }
+.status-error { background: #ff0055; }
+.status-error::after { background: #ff0055; }
+
+@keyframes ripple {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+/* ── SIDEBAR NAV ──────────────────────────────────────────── */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #4a5568;
+  font-family: var(--font-family-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+}
+.nav-item:hover {
+  background: rgba(0,242,255,0.04);
+  border-color: rgba(0,242,255,0.12);
+  color: rgba(255,255,255,0.8);
+}
+.nav-item.active {
+  background: rgba(0,242,255,0.06);
+  border-color: rgba(0,242,255,0.25);
+  color: #00f2ff;
+}
+
+/* ── HUD BUTTONS ──────────────────────────────────────────── */
+.btn-hud {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(0,242,255,0.1);
+  border: 1px solid rgba(0,242,255,0.4);
+  border-radius: 4px;
+  color: #00f2ff;
+  font-family: var(--font-family-mono);
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-hud:hover {
+  background: rgba(0,242,255,0.15);
+  border-color: rgba(0,242,255,0.6);
+  box-shadow: 0 0 12px rgba(0,242,255,0.2);
+}
+
+.btn-hud-ghost {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  color: rgba(255,255,255,0.6);
+  font-family: var(--font-family-mono);
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-hud-ghost:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.8);
+}
+
+/* ── HUD INPUT ────────────────────────────────────────────── */
+.hud-input {
+  width: 100%;
+  background: rgba(2,2,4,0.7);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 2px;
+  padding: 14px 16px 14px 48px;
+  color: white;
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  outline: none;
+  transition: all 0.25s ease;
+}
+.hud-input::placeholder { color: rgba(255,255,255,0.2); }
+.hud-input:focus {
+  border-color: rgba(0,242,255,0.45);
+  box-shadow: 0 0 0 1px rgba(0,242,255,0.1), 0 0 20px rgba(0,242,255,0.04);
+}
+
+/* ── VIDEO FRAME ──────────────────────────────────────────── */
+.video-frame {
+  position: relative;
+  background: #06060a;
+  overflow: hidden;
+}
+.video-frame::after {
+  content: 'LIVE';
+  position: absolute;
+  top: 12px; right: 12px;
+  background: rgba(255,0,85,0.9);
+  color: white;
+  font-family: var(--font-family-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  z-index: 20;
+}
+
+/* ── SCANLINES ────────────────────────────────────────────── */
+.scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px, transparent 2px,
+    rgba(0,242,255,0.012) 2px, rgba(0,242,255,0.012) 4px
+  );
+  pointer-events: none;
+  z-index: 5;
+  border-radius: inherit;
+}
+
+/* ── TRACKER BADGE ────────────────────────────────────────── */
+.tracker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,242,255,0.06);
+  border: 1px solid rgba(0,242,255,0.2);
+  color: #00f2ff;
+  font-family: var(--font-family-mono);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+/* ── RECHARTS OVERRIDES ───────────────────────────────────── */
+.recharts-cartesian-grid line { stroke: rgba(255,255,255,0.04) !important; }
+.recharts-surface { overflow: visible; }

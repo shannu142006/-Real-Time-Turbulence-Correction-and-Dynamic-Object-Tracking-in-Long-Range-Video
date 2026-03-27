@@ -1,0 +1,16 @@
+{
+  "name": "turbulence-correction-platform",
+  "version": "1.0.0",
+  "description": "Unified runner for Turbulence Correction & Object Tracking",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install && cd ../python-backend && pip install -r requirements.txt",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:python": "cd python-backend && python main.py",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:python\"",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
